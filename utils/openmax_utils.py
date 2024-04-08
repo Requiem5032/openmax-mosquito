@@ -38,9 +38,7 @@ def get_openmax_predict(openmax, threshold):
     res = np.zeros_like(openmax)
     max_idx = np.argmax(openmax)
 
-    if max_idx == 16:
-        return res
-    elif openmax[-1] >= threshold:
+    if (max_idx == 16) or (openmax[-1] >= threshold):
         return res
     else:
         res[max_idx] = 1.
