@@ -47,11 +47,15 @@ def get_openmax_predict(openmax, threshold):
     
 
 def get_openmax_label(openmax, threshold):
-    one_hot_label = get_openmax_predict(openmax, threshold)
-    if np.any(one_hot_label):
-        return np.argmax(one_hot_label)
-    else:
-        return -1
+    one_hot = get_openmax_predict(openmax, threshold)
+    return convert_to_label(one_hot.reshape(1, -1))
+
+
+def convert_to_label(one_hot):
+    label = np.argmax(one_hot, axis=1)
+    res = np.full_like(label, -1)
+    res[np.any(one_hot, axis=1)] = label[np.any(one_hot, axis=1)]
+    return res
 
 
 def convert_to_binary_label(one_hot):
