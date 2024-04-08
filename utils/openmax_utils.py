@@ -35,12 +35,16 @@ def compute_distance_dict(mean_feature, feature):
 
 
 def get_openmax_predict(openmax, threshold):
+    res = np.zeros_like(openmax)
     max_idx = np.argmax(openmax)
-    if openmax[max_idx] < threshold:
-        res = -1
+
+    if max_idx == 16:
+        return res
+    elif openmax[-1] >= threshold:
+        return res
     else:
-        res = openmax[max_idx]
-    return res
+        res[max_idx] = 1.
+        return res
 
 
 def convert_to_binary_label(one_hot):
