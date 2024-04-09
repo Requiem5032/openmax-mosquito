@@ -25,7 +25,7 @@ class JHUDataset(tf.keras.utils.Sequence):
 
     def get_all(self):
         return np.asarray(self.x), np.asarray(self.y)
-    
+
     def get_class_num(self):
         return len(np.unique(np.asarray(self.y), axis=0))
 
